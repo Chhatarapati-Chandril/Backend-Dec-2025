@@ -1,0 +1,20 @@
+Express - Web Framework for node.js
+Mongoose - MongoDB object modeling for node.js
+
+Databse - Databse is always in another continent (TIME)
+        - try-catch and async-await
+
+
+module js -
+    import/export statements
+common js - 
+    require() to import module exports to export
+
+
+- npm init
+
+- npm i -D nodemon
+- npm i -D prettier
+- npm i express
+- npm i dotenv
+- npm i mongoose

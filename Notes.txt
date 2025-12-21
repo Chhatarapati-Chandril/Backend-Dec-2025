@@ -11,6 +11,8 @@ common js -
     require() to import module exports to export
 
 
+app.use -> middleware and configurations
+
 - npm init
 
 - npm i -D nodemon
@@ -18,3 +20,5 @@ common js -
 - npm i express
 - npm i dotenv
 - npm i mongoose
+- npm i cors
+- npm i cookie-parser

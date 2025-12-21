@@ -1,39 +1,30 @@
+import connectDB from "./db/db.js"
+import app from "./app.js";
 import dotenv from "dotenv"
-import connectDB from "./db/db.js";
 
 dotenv.config({
     path: ".env"
 })
 
+const port = process.env.PORT || 8000
+
+process.on("unhandledRejection", (err) => {
+    console.error("Unhandled Rejection", err);
+    process.exit(1);
+});
+  
+process.on("uncaughtException", (err) => {
+    console.error("Uncaught Exception", err);
+    process.exit(1);
+});
 
 connectDB()
-
-
-
-
-
-
-
-
-
-
-
-// (async (value) => {
-//     try {
-//         await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
-
-//         app.on("Error", (error) => {
-//             console.log("Error: ", error);
-//             throw error
-//         })
-
-//         app.listen(process.env.PORT, () => {
-//             console.log(`App is listenign on port: http://${process.env.PORT}`);
-            
-//         })
-
-//     } catch (error) {
-//         console.error("Error:", error);
-//         throw error
-//     }
-// })()
+.then(() => {
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+    })
+})
+.catch((error) => {
+    console.log("MongoDB connection failed !!!", error);
+    process.exit(1)
+})

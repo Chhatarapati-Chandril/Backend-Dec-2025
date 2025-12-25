@@ -1,2 +1,2 @@
 export const DB_NAME = "videotube"
-export const JSON_LIMIT = "64kb";
+export const JSON_LIMIT = "64kb"

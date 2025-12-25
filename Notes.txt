@@ -5,13 +5,66 @@ Databse - Databse is always in another continent (TIME)
         - try-catch and async-await
 
 
+**************************** Promise, Async and Await ****************************
+
+Promise - 
+    A Promise is an object that represents a value that is NOT available yet, but will be available later (or fail).
+
+    pending   → still waiting
+    fulfilled → success, value available
+    rejected  → failed, error available
+
+    Once fulfilled or rejected → it never changes again.
+
+Async - 
+    async does NOT make code asynchronous.
+    async means the function ALWAYS returns a Promise.
+
+Await - 
+    await extracts the value from a Promise.
+
+Async and Await Guidelines:
+    - If there is await, there must be async.
+    - If there is async, there may or may not be await.
+    - await is used only when you need to wait for a Promise to resolve before continuing.
+    - If a function is synchronous, don’t use await or async.
+    * A function can be async EVEN IF it is not written with async.
+
+**************************** Summary ****************************
+
+Promise → future value
+async keyword → wraps return value into Promise
+await → unwraps value from Promise
+returns Promise → async behavior
+no Promise → sync behavior
+
+**************************** Why “returns a Promise = async” ****************************
+
+Promises represent future values
+Async operations (DB, network, file) cannot give results immediately
+So they return Promises
+
+Therefore: Any function that returns a Promise is async by nature.
+
+Even if:
+it is NOT written with async
+it uses callbacks internally
+it’s from a library
+
+
+**************************** Module Systems in JavaScript ****************************
+
 module js -
     import/export statements
 common js - 
     require() to import module exports to export
 
 
+
 app.use -> middleware and configurations
+
+
+**************************** Setting up Project ****************************
 
 - npm init
 
@@ -22,3 +75,8 @@ app.use -> middleware and configurations
 - npm i mongoose
 - npm i cors
 - npm i cookie-parser
+- npm i mongoose-aggregate-paginate-v2
+- npm i bcrypt
+- npm i jsonwebtoken
+- npm i cloudinary
+- npm i multer

@@ -193,7 +193,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 
 
 
-export default {
+export {
     registerUser, 
     loginUser,
     logoutUser

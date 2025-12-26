@@ -19,6 +19,7 @@ Promise -
 Async - 
     async does NOT make code asynchronous.
     async means the function ALWAYS returns a Promise.
+    async changes return type — always.
 
 Await - 
     await extracts the value from a Promise.

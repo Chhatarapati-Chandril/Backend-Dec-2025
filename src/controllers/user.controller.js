@@ -5,23 +5,8 @@ import uploadOnCloudinary from "../utils/cloudinary.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import validateRegisterUser from "../validators/user.validator.js";
 import jwt from "jsonwebtoken";
+import generateAccessAndRefreshToken from "../services/auth.service.js";
 import { cookieOptions } from "../constants.js";
-
-
-const generateAccessAndRefreshToken = async(userId) => {
-    const user = await User.findById(userId)
-    if (!user) {
-        throw new ApiError(404, "User not found")
-    }
-    const accessToken = user.generateAccessToken()
-    const refreshToken = user.generateRefreshToken()
-
-    user.refreshToken = refreshToken
-    await user.save({ validateBeforeSave: false })
-
-    return { accessToken, refreshToken }
-
-}
 
 
 // ******************* register user *******************

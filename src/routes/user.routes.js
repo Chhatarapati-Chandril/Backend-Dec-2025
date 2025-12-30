@@ -1,32 +1,57 @@
 import { Router } from "express"
-import { registerUser, loginUser, logoutUser, refreshAccessToken } from "../controllers/user.controller.js"
 import upload from "../middlewares/multer.middleware.js"
 import verifyJWT from "../middlewares/auth.middleware.js"
+import changePasswordLimit from "../middlewares/rateLimit.middleware.js"
+import {
+    registerUser,
+    loginUser,
+    logoutUser,
+    refreshAccessToken,
+    getCurrentUser,
+    changeCurrentPassword,
+    updateAccountDetails,
+    updateUserAvatar,
+    updateUserCoverImage
+} from "../controllers/user.controller.js";
 
 
 const userRouter = Router()
 
-userRouter.route("/register").post(
-    upload.fields(
-        [
-            {
-                name: "avatar",
-                maxCount: 1
-            },
-            {
-                name: "coverImage",
-                maxCount: 1
-            }
-        ]
-    ),
-    registerUser
-)
+userRouter.route("/register")
+    .post(
+        upload.fields([
+            { name: "avatar", maxCount: 1 },
+            { name: "coverImage", maxCount: 1 }
+        ]),
+        registerUser
+    )
 
-userRouter.route("/login").post(loginUser)
+// auth
+userRouter.route("/login")
+    .post(loginUser)
 
-// secured routes
-userRouter.route("/logout").post(verifyJWT, logoutUser)
+userRouter.route("/logout")
+    .post(verifyJWT, logoutUser)
 
-userRouter.route("/refresh-token").post(refreshAccessToken)
+userRouter.route("/refresh-token")
+    .post(refreshAccessToken)
+
+// user
+userRouter.route("/me")
+    .get(verifyJWT, getCurrentUser)
+
+userRouter.route("/update-account")
+    .patch(verifyJWT, updateAccountDetails)
+
+userRouter.route("/update-avatar")
+    .patch(verifyJWT, upload.single("avatar"), updateUserAvatar)
+
+userRouter.route("/update-cover-image")
+    .patch(verifyJWT, upload.single("coverImage"), updateUserCoverImage)
+
+// security
+userRouter.route("/change-password")
+    .patch(verifyJWT, changePasswordLimit, changeCurrentPassword)
+
 
 export default userRouter

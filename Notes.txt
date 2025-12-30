@@ -81,3 +81,4 @@ app.use -> middleware and configurations
 - npm i jsonwebtoken
 - npm i cloudinary
 - npm i multer
+- npm i express-rate-limit

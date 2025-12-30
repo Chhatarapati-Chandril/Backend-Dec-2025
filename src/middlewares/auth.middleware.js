@@ -28,6 +28,14 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
         throw new ApiError(401, "Invalid access token")
     }
 
+    // invalidate token if password changed
+    if (
+        user.passwordChangedAt &&
+        decodedToken.iat * 1000 < user.passwordChangedAt.getTime()
+    ) {
+        throw new ApiError(401, "Access token expired due to password change");
+    }
+
     req.user = user
     next()
 

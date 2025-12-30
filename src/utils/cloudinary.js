@@ -29,7 +29,9 @@ const uploadOnCloudinary = async (localFilePath) => {
         // ALWAYS clean up local file if it exists
         try {
             await fs.unlink(localFilePath)
-        } catch {}
+        } catch (error) {
+            console.error("Failed to delete temp file:", error.message);
+        }        
     }
 }
 

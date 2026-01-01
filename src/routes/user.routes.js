@@ -11,7 +11,9 @@ import {
     changeCurrentPassword,
     updateAccountDetails,
     updateUserAvatar,
-    updateUserCoverImage
+    updateUserCoverImage,
+    getUserChannelProfile,
+    getWatchHistory
 } from "../controllers/user.controller.js";
 
 
@@ -37,7 +39,7 @@ userRouter.route("/refresh-token")
     .post(refreshAccessToken)
 
 // user
-userRouter.route("/me")
+userRouter.route("/current-user")
     .get(verifyJWT, getCurrentUser)
 
 userRouter.route("/update-account")
@@ -48,6 +50,12 @@ userRouter.route("/update-avatar")
 
 userRouter.route("/update-cover-image")
     .patch(verifyJWT, upload.single("coverImage"), updateUserCoverImage)
+
+userRouter.route("/channel/:username")
+    .get(verifyJWT, getUserChannelProfile)
+
+userRouter.route("/history")
+    .get(verifyJWT, getWatchHistory)
 
 // security
 userRouter.route("/change-password")

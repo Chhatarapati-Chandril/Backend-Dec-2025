@@ -2,7 +2,7 @@ import multer from "multer"
 import path from "path"
 import fs from "fs"
 import crypto from "crypto"
-import ApiError from "../utils/ApiError"
+import ApiError from "../utils/ApiError.js"
 
 const uploadDir = path.resolve("public/temp")
 
